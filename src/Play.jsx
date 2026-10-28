@@ -39,9 +39,9 @@ const L = {
     weak: 'Flick it harder, upward.', tricks: 'Tricks', practise: (n, k) => `${n}: practised ${k}/${PRACTICE}`, locked: 'locked', vision: 'Corgi vision', huh: 'Didn\'t catch a trick there.',
   },
   ja: {
-    sleepy: '日本はもう夜。むぎはねむねむ… 💤（呼べば遊ぶよ）', walkQ: 'むぎがリードを持ってきたよ。おさんぽ？', walk: 'おさんぽ', walking: 'おさんぽ！くんくん…', walked: 'いいおさんぽだった！ごきげん。', photo: '写真',
+    sleepy: '日本はもう夜。ムギはねむねむ… 💤（呼べば遊ぶよ）', walkQ: 'ムギがリードを持ってきたよ。おさんぽ？', walk: 'おさんぽ', walking: 'おさんぽ！くんくん…', walked: 'いいおさんぽだった！ごきげん。', photo: '写真',
     apt: 'APT.ダンス！首をかしげて右、左、右、左…', hum: 'APT.をハミング', humOn: 'サビのリズムをハミングしてね（ア・パ・トゥ）…', aptBtn: 'APT.ダンス',
-    title: 'むぎとあそぶ', hint: 'むぎをタップして上にドラッグすると遠くへ。ボールははじいて投げてね。',
+    title: 'ムギとあそぶ', hint: 'ムギをタップして上にドラッグすると遠くへ。ボールははじいて投げてね。',
     away: '遠くにいるよ。「おいで」って言ってみて（ボタンでもOK）。', come: 'おいで', running: '走ってくるよ！', home: 'いい子！しっぽブンブン。',
     talk: '話す', listening: '聞いてるよ… 技の名前か「おいで」を言ってね。', noMic: 'ここでは音声が使えないよ。ボタンを使ってね。', heard: w => `聞こえた：「${w}」`,
     notYet: n => `「${n}」はまだ知らないよ。前の技をもっと練習しよう。`, far: '遠すぎて聞こえないよ。先に呼んでね。',

@@ -22,7 +22,7 @@ function NotFound() {
   )
 }
 
-const TABS = [['house', 'House', 'おうち', '🏠'], ['play', 'Play', 'あそぶ', '🎾'], ['mugi', 'Mugi', 'むぎ', '🐕'], ['mizu', 'Mizu', 'みず', '🫧'], ['films', 'Films', 'ビデオ', '🎬']]
+const TABS = [['house', 'House', 'おうち', '🏠'], ['play', 'Play', 'あそぶ', '🎾'], ['mugi', 'Mugi', 'ムギ', '🐕'], ['mizu', 'Mizu', 'ミズ', '🫧'], ['films', 'Films', 'ビデオ', '🎬']]
 
 export default function App() {
   const lang = useLang()

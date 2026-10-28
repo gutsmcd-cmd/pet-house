@@ -4,7 +4,7 @@ import Corgi from './Corgi.jsx'
 import { useLang, clamp } from './shared.js'
 
 const T = { en: { title: 'Photo with Mugi', hint: 'Drag Mugi into place. Pinch (or use the slider) to resize.', save: 'Save photo', saved: 'Saved to your phone! 📸', noCam: "The camera didn't open. Allow camera access and try again.", close: 'Close', flip: 'Flip' },
-  ja: { title: 'むぎと写真', hint: 'むぎをドラッグして置いてね。ピンチ（またはスライダー）で大きさを変えられるよ。', save: '写真を保存', saved: 'スマホに保存したよ！📸', noCam: 'カメラが開かなかったよ。カメラを許可してもう一度。', close: '閉じる', flip: '向き' } }
+  ja: { title: 'ムギと写真', hint: 'ムギをドラッグして置いてね。ピンチ（またはスライダー）で大きさを変えられるよ。', save: '写真を保存', saved: 'スマホに保存したよ！📸', noCam: 'カメラが開かなかったよ。カメラを許可してもう一度。', close: '閉じる', flip: '向き' } }
 
 export default function Photo({ onClose }) {
   const lang = useLang(), t = T[lang]

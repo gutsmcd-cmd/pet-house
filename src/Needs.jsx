@@ -18,7 +18,7 @@ export function TankCard({ onClean }) {
   if (!show) return null
   return (
     <div className="need-card">
-      <span>🫧 {lang === 'ja' ? 'みずの水そう、ちょっとくもってるよ。' : "Mizu's tank looks a little cloudy."}</span>
+      <span>🫧 {lang === 'ja' ? 'ミズの水そう、ちょっとくもってるよ。' : "Mizu's tank looks a little cloudy."}</span>
       <button className="pill on" onClick={() => { doneClean(); setShow(false); onClean?.() }}>{lang === 'ja' ? 'おそうじ' : 'Clean'}</button>
     </div>
   )
