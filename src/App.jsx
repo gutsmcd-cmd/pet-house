@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useJaDom } from './i18n.js'
 import House from './House.jsx'
 import Mugi from './Mugi.jsx'
 import Mizu from './Mizu.jsx'
@@ -30,10 +31,12 @@ export default function App() {
   const [r, setR] = useState(routeOf)
   useEffect(() => { const f = () => setR(routeOf()); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f) }, [])
   useEffect(() => { document.title = (TABS.find(t => t[0] === r)?.[1] ?? 'Not found') + ' · Pet House' }, [r])
+  const box = useRef(null)
+  useJaDom(box, lang === 'ja' && ['house', 'mugi', 'mizu'].includes(r))
   const Page = { house: House, play: Play, mugi: Mugi, mizu: Mizu, films: Films }[r] ?? NotFound
   return (
     <div className="shell">
-      <Page key={r} />
+      <div ref={box} className="pagebox"><Page key={r + lang} /></div>
       <nav className="tabs" aria-label="Rooms">
         {TABS.map(([id, label, ja, emoji]) => (
           <a key={id} href={'#/' + id} className={'tab' + (r === id ? ' is-on' : '')} aria-current={r === id ? 'page' : undefined}>

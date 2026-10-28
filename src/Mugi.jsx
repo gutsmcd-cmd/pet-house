@@ -1,3 +1,4 @@
+import { setLang, getLang } from './shared.js'
 import { useEffect, useRef, useState } from 'react'
 import { MOVES, move, loadHum, saveHum, speak, clamp, reducedMotion } from './shared.js'
 import { go } from './App.jsx'
@@ -110,7 +111,7 @@ export default function Mugi() {
   function say(raw) {
     const t = raw.trim(); if (!t) return
     const lo = t.toLowerCase()
-    if (/^(mugi|come|come here|here girl)\b/.test(lo) || lo === 'むぎ') return call()
+    if (/^(mugi|come|come here|here girl)\b/.test(lo) || /^(むぎ|ムギ|おいで)/.test(t)) return call()
     if (/^(house|home|mizu)\b/.test(lo) || lo.includes('go home')) return go(lo.startsWith('mizu') ? 'mizu' : 'house')
     if (lo.includes('dance') || lo.includes('ダンス')) return doDance()
     if (lo.includes('apt') || t.includes('아파트') || t.includes('アパート')) {
@@ -183,7 +184,7 @@ export default function Mugi() {
   function listen() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition
     if (!SR) { setMsg("This phone won't listen. Type it instead."); return }
-    const r = new SR(); r.lang = 'en-US'; r.interimResults = false
+    const r = new SR(); r.lang = getLang() === 'ja' ? 'ja-JP' : 'en-US'; r.interimResults = false
     r.onresult = e => say(e.results[0]?.[0]?.transcript ?? '')
     r.onerror = () => setMsg("She didn't catch that.")
     setMsg('Listening…'); r.start()
@@ -238,6 +239,7 @@ export default function Mugi() {
             <p className="sub">Tap her name to call her</p>
           </div>
           <div className="chips">
+            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label="Language">{getLang() === 'ja' ? 'EN' : '日本語'}</button>
             <button type="button" className="chip" aria-pressed={cam} onClick={toggleCam} title={cam ? 'Stop the camera' : 'Look together'}>
               {cam ? <CameraOff /> : <Camera />}<span className="sr">{cam ? 'Stop the camera' : 'Look together'}</span>
             </button>

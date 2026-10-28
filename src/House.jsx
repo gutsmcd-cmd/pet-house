@@ -1,3 +1,4 @@
+import { setLang, getLang } from './shared.js'
 import { useEffect, useRef, useState } from 'react'
 import Axolotl from './Axolotl.jsx'
 import { MOVES, loadHum, reducedMotion, audioCtx } from './shared.js'
@@ -105,6 +106,7 @@ export default function House() {
             <p className="sub">Namba · {label}</p>
           </div>
           <div className="chips">
+            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label="Language">{getLang() === 'ja' ? 'EN' : '日本語'}</button>
             <button type="button" className="chip" aria-pressed={raining} onClick={rain} title={raining ? 'Stop the rain' : 'Rain'}>
               <Rain /><span className="sr">{raining ? 'Stop the rain' : 'Rain'}</span>
             </button>
