@@ -6,7 +6,7 @@ import { useLang, bark } from './shared.js'
 const W = 160, H = 120, MW = 32, MH = 24
 const LINES = {
   en: { title: 'Corgi vision', sub: 'What Mugi sees: blues and yellows, a little blurry.', calm: 'She is watching…', move: ['Something moved! Woof!', 'Ears up. What was that?', 'Tail going. Is it a friend?'], noCam: 'The camera didn\'t open. Allow camera access and try again.', close: 'Close' },
-  ja: { title: 'コーギーの目', sub: 'むぎの見え方：青と黄色、ちょっとぼんやり。', calm: 'じーっと見てるよ…', move: ['何か動いた！ワン！', '耳ピーン。今のなに？', 'しっぽフリフリ。おともだち？'], noCam: 'カメラが開かなかったよ。カメラを許可してもう一度。', close: '閉じる' },
+  ja: { title: 'コーギーの目', sub: 'ムギの見え方：青と黄色、ちょっとぼんやり。', calm: 'じーっと見てるよ…', move: ['何か動いた！ワン！', '耳ピーン。今のなに？', 'しっぽフリフリ。おともだち？'], noCam: 'カメラが開かなかったよ。カメラを許可してもう一度。', close: '閉じる' },
 }
 export default function Vision({ onClose }) {
   const lang = useLang(), t = LINES[lang]
