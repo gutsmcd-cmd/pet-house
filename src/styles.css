@@ -268,3 +268,4 @@ input{font:inherit}
 .pagebox>.page{flex:1}
 .tray-btn{display:none}
 @media (max-width:600px){ .tray-btn{display:inline-flex} .play .dock .tray{display:none} .play .dock.tray-open .tray{display:flex} .play .dock.tray-open .tricks.tray{display:grid} }
+/* trick tray */
