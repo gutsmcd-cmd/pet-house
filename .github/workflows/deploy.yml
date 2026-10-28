@@ -26,6 +26,16 @@ jobs:
             git rm -r -q b64
             git add -A && git commit -m "Unpack uploaded site source" && git push origin HEAD:main
           fi
+      - name: Bring in the corgi home videos (one-time, from koro-films)
+        run: |
+          set -e
+          if [ ! -f public/films/puddle.mp4 ]; then
+            mkdir -p public/films
+            for f in box floor garden pair puddle zoomies; do for e in mp4 jpg; do
+              curl -fsSL -o public/films/$f.$e https://raw.githubusercontent.com/gutsmcd-cmd/koro-films/main/films/$f.$e
+            done; done
+            git add public/films && git commit -m "Add Koro home videos" && git push origin HEAD:main
+          fi
       - run: npm ci --no-audit --no-fund && npx vite build
       - name: Publish dist to gh-pages
         run: |

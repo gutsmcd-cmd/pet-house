@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import House from './House.jsx'
 import Mugi from './Mugi.jsx'
 import Mizu from './Mizu.jsx'
+import Play from './Play.jsx'
+import Films from './Films.jsx'
+import { useLang } from './shared.js'
 
 const routeOf = () => (location.hash.replace(/^#\/?/, '').split(/[?/]/)[0] || 'house').toLowerCase()
 export const go = to => { location.hash = '#/' + to }
@@ -19,20 +22,22 @@ function NotFound() {
   )
 }
 
-const TABS = [['house', 'House', '🏠'], ['mugi', 'Mugi', '🐕'], ['mizu', 'Mizu', '🫧']]
+const TABS = [['house', 'House', 'おうち', '🏠'], ['play', 'Play', 'あそぶ', '🎾'], ['mugi', 'Mugi', 'むぎ', '🐕'], ['mizu', 'Mizu', 'みず', '🫧'], ['films', 'Films', 'ビデオ', '🎬']]
 
 export default function App() {
+  const lang = useLang()
+  useEffect(() => { document.documentElement.lang = lang }, [lang])
   const [r, setR] = useState(routeOf)
   useEffect(() => { const f = () => setR(routeOf()); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f) }, [])
   useEffect(() => { document.title = (TABS.find(t => t[0] === r)?.[1] ?? 'Not found') + ' · Pet House' }, [r])
-  const Page = r === 'house' ? House : r === 'mugi' ? Mugi : r === 'mizu' ? Mizu : NotFound
+  const Page = { house: House, play: Play, mugi: Mugi, mizu: Mizu, films: Films }[r] ?? NotFound
   return (
     <div className="shell">
       <Page key={r} />
       <nav className="tabs" aria-label="Rooms">
-        {TABS.map(([id, label, emoji]) => (
+        {TABS.map(([id, label, ja, emoji]) => (
           <a key={id} href={'#/' + id} className={'tab' + (r === id ? ' is-on' : '')} aria-current={r === id ? 'page' : undefined}>
-            <span aria-hidden="true">{emoji}</span>{label}
+            <span aria-hidden="true">{emoji}</span>{lang === 'ja' ? ja : label}
           </a>
         ))}
       </nav>

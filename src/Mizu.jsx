@@ -1,3 +1,4 @@
+import { TankCard } from './Needs.jsx'
 import { useEffect, useRef, useState } from 'react'
 import Axolotl from './Axolotl.jsx'
 import { speak, clamp, MORPHS, audioCtx } from './shared.js'
@@ -126,6 +127,7 @@ export default function Mizu() {
             </button>
           </div>
         </header>
+        <TankCard onClean={() => setMsg('Sparkly clean! Mizu does a happy wiggle. ✨')} />
 
         <div className="mizu-wrap">
           <div ref={tank} className={`mizu-tank ${night ? 'is-night' : ''}`} onPointerDown={down} onPointerMove={moveP} onPointerUp={up} onPointerCancel={up}>
