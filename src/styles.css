@@ -264,3 +264,7 @@ input{font:inherit}
 .photo-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(#0000,#000b)}
 .photo-bar input{flex:1;accent-color:#e0559a}
 .photo .primary{background:#e0559a;color:#fff}
+.pagebox{flex:1;min-height:0;display:flex;flex-direction:column}
+.pagebox>.page{flex:1}
+.tray-btn{display:none}
+@media (max-width:600px){ .tray-btn{display:inline-flex} .play .dock .tray{display:none} .play .dock.tray-open .tray{display:flex} .play .dock.tray-open .tricks.tray{display:grid} }

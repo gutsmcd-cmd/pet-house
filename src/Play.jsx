@@ -54,6 +54,7 @@ const SR = typeof window !== 'undefined' && (window.SpeechRecognition || window.
 
 export default function Play() {
   const lang = useLang(), t = L[lang]
+  const [tray, setTray] = useState(false)
   const [dog, setDog] = useState(HOME), [dur, setDur] = useState(0), [face, setFace] = useState(1)
   const [act, setAct] = useState(''), [trick, setTrick] = useState(''), [mouth, setMouth] = useState(false), [ears, setEars] = useState(false)
   const [ball, setBall] = useState({ x: 80, z: -0.08, lift: 0, show: true })
@@ -208,7 +209,7 @@ export default function Play() {
     <main className="page play">
       <div className="col">
         <header className="bar">
-          <div><h1 className="title">{t.title}</h1><p className="sub">🐕 Mugi · {lang === 'ja' ? 'コーギー' : 'corgi'}</p></div>
+          <div><h1 className="title">{t.title}</h1><p className="sub">🐕 {lang === 'ja' ? 'ムギ · コーギー' : 'Mugi · corgi'}</p></div>
           <div className="chips">
             <button className="chip langchip" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} aria-label="Language">{lang === 'ja' ? 'EN' : '日本語'}</button>
             <button className="chip" title={t.photo} aria-label={t.photo} onClick={() => setPhoto(true)}>📷</button>
@@ -228,18 +229,19 @@ export default function Play() {
             <div className="dog-flip" style={{ transform: `scaleX(${face})` }}><div className="dog-body"><Corgi ball={mouth} dead={trick === 'dead'} ears={ears || act === 'happy'} /></div></div>
           </div>
         </div>
-        <div className="dock">
+        <div className={'dock' + (tray ? ' tray-open' : '')}>
           {walkQ && <div className="need-card"><span>🦮 {t.walkQ}</span><button className="pill on" onClick={goWalk}>{t.walk}</button></div>}
           <p className="msg" aria-live="polite">{msg}</p>
           <div className="row">
             <button className={'primary grow' + (listen ? ' on-listen' : '')} onClick={startListen}>🎤 {listen ? (lang === 'ja' ? '止める' : 'Stop') : t.talk}</button>
             <button className="pill" onClick={comeHere}>👋 {t.come}</button>
+            <button className="pill tray-btn" onClick={() => setTray(v => !v)} aria-expanded={tray}>{t.tricks} {tray ? '▾' : '▴'}</button>
           </div>
-          <div className="row">
+          <div className="row tray">
             <button className={'pill grow' + (humming ? ' on' : '')} onClick={toggleHum} aria-pressed={humming}>🎵 {t.hum}</button>
             <button className="pill grow" onClick={aptDance}>💃 {t.aptBtn}</button>
           </div>
-          <div className="tricks" role="group" aria-label={t.tricks}>
+          <div className="tricks tray" role="group" aria-label={t.tricks}>
             {TRICKS.map(tr => {
               const open = unlocked.includes(tr.id), k = Math.min(PRACTICE, prog[tr.id] || 0)
               return (
