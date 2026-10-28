@@ -1,0 +1,3 @@
+{ "name": "Pet House", "short_name": "Pet House", "start_url": "./", "scope": "./", "display": "standalone",
+  "background_color": "#f6ead8", "theme_color": "#e0559a",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }] }
