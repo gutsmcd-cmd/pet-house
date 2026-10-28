@@ -1,6 +1,7 @@
 import { setLang, getLang } from './shared.js'
 import { useEffect, useRef, useState } from 'react'
 import Axolotl from './Axolotl.jsx'
+import { Greeting, SeasonLayer } from './Season.jsx'
 import { MOVES, loadHum, reducedMotion, audioCtx } from './shared.js'
 import { Rain, Moon, Sun, Play } from './icons.jsx'
 
@@ -116,9 +117,11 @@ export default function House() {
           </div>
         </header>
 
+        <Greeting phase={phase} onHello={bell} />
         <div className="house-room" onPointerDown={() => { if (asleep) { wake(); setMsg("They're up.") } }}>
           <div className="house-sky" />
           {look === 'night' && <div className="house-stars" />}
+          <SeasonLayer />
           {raining && <div className="house-rain" aria-hidden="true">{Array.from({ length: 14 }, (_, i) => <span key={i} style={{ left: `${(i * 7) % 100}%`, animationDelay: `${(i % 5) * 0.2}s` }} />)}</div>}
           <button type="button" className="house-bell" aria-label="Bell" onClick={e => { e.stopPropagation(); bell() }}><span /></button>
           <div className="house-kitchen" onPointerDown={e => e.stopPropagation()}>
@@ -127,7 +130,7 @@ export default function House() {
             <button type="button" className={`house-noren ${noren ? 'is-open' : ''}`} aria-label="Noren" onClick={() => { setNoren(true); setTimeout(() => setNoren(false), 700); setMsg('Noren. 難波.') }}>難波</button>
             <i className={`house-lantern ${look === 'night' || look === 'dusk' ? 'is-lit' : ''}`} />
             <div className="house-counter">
-              <button type="button" className={`house-cooker ${cooker ? 'is-on' : ''}`} aria-label="Rice cooker" onClick={() => { setCooker(true); setTimeout(() => setCooker(false), 2600); setClip(MOVES[0]); setMsg('ご飯できた.') }}><span /></button>
+              <button type="button" className={`house-cooker ${cooker ? 'is-on' : ''}`} aria-label="Rice cooker" onClick={() => { setCooker(true); setTimeout(() => setCooker(false), 2600); setClip(MOVES[0]); setMsg('Rice is ready.') }}><span /></button>
               <button type="button" className={`house-kettle ${kettle ? 'is-on' : ''}`} aria-label="Kettle" onClick={() => { setKettle(true); setTimeout(() => setKettle(false), 1800); setMsg("Kettle's on.") }} />
               <button type="button" className={`house-pan ${pan ? 'is-hot' : ''}`} aria-label="Takoyaki" onClick={() => { setPan(true); setClip(MOVES[0]); setMsg('Takoyaki. She wants one.') }}>
                 {Array.from({ length: 6 }, (_, i) => <span key={i} />)}

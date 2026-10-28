@@ -22,7 +22,10 @@ export default function Mizu() {
   const [sway, setSway] = useState(false)
   const [popped, setPopped] = useState([false, false, false])
   const [pellet, setPellet] = useState(null)
-  const [msg, setMsg] = useState('Drag her. Tap the plant, the stone, or a bubble.')
+  const [hearts, setHearts] = useState([])
+  const [happy, setHappy] = useState(false)
+  const lotlDown = useRef(null), taps = useRef(0), happyT = useRef(0)
+  const [msg, setMsg] = useState('Tap her. Drag her. Try the plant, the stone, or a bubble.')
   const [text, setText] = useState('')
   const tank = useRef(null), depthRef = useRef(0), posRef = useRef(pos), pointers = useRef(new Map()), pinch = useRef(null), tap = useRef(null), stopBubbles = useRef(null), waveT = useRef(0)
 
@@ -34,7 +37,7 @@ export default function Mizu() {
     const wheel = e => { e.preventDefault(); setDepth(d => clamp(d + e.deltaY * 0.0015, 0, 1)) }
     el?.addEventListener('wheel', wheel, { passive: false })
     const t = setInterval(() => { setBlink(true); setTimeout(() => setBlink(false), 140) }, 4200)
-    return () => { el?.removeEventListener('wheel', wheel); clearInterval(t); clearTimeout(waveT.current); stopBubbles.current?.() }
+    return () => { el?.removeEventListener('wheel', wheel); clearInterval(t); clearTimeout(waveT.current); clearTimeout(happyT.current); stopBubbles.current?.() }
   }, [])
 
   function pick(m) { setMorph(m); localStorage.setItem('mizu-morph', m); setMsg(LINES[m]) }
@@ -46,6 +49,21 @@ export default function Mizu() {
     const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 640; o.connect(g); g.connect(ctx.destination)
     const t = ctx.currentTime; g.gain.setValueAtTime(1e-4, t); g.gain.exponentialRampToValueAtTime(0.045, t + 0.01); g.gain.exponentialRampToValueAtTime(1e-4, t + 0.12)
     o.start(t); o.stop(t + 0.13); o.onended = () => ctx.close()
+  }
+  const HAPPY = ['She smiled at you.', 'A happy wiggle!', 'Gills all fluffy. She likes that.', 'She did a little spin.', 'Tickles! She wiggles away.']
+  function tapLotl() {
+    taps.current += 1
+    const line = taps.current % 7 === 0 ? 'She loves you, Rie. 💕' : HAPPY[(taps.current - 1) % HAPPY.length]
+    setMsg(line); setHappy(true); clearTimeout(happyT.current); happyT.current = setTimeout(() => setHappy(false), 900)
+    const id = Date.now(), p = posRef.current
+    setHearts(h => [...h.slice(-5), { id, x: p.x + (Math.random() * 8 - 4), y: p.y - depthRef.current * 12 - 14, c: taps.current % 3 ? '💗' : '🫧' }])
+    setTimeout(() => setHearts(h => h.filter(x => x.id !== id)), 1600)
+    const ctx = audioCtx(); if (ctx) {
+      const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.connect(g); g.connect(ctx.destination); const t = ctx.currentTime
+      o.frequency.setValueAtTime(700, t); o.frequency.exponentialRampToValueAtTime(1300, t + 0.12)
+      g.gain.setValueAtTime(1e-4, t); g.gain.exponentialRampToValueAtTime(0.04, t + 0.02); g.gain.exponentialRampToValueAtTime(1e-4, t + 0.2)
+      o.start(t); o.stop(t + 0.22); o.onended = () => ctx.close()
+    }
   }
   function feed() {
     const x = 28 + Math.random() * 44
@@ -149,13 +167,14 @@ export default function Mizu() {
                 onPointerDown={e => { e.stopPropagation(); if (popped[i]) return; setPopped(p => p.map((v, j) => j === i || v)); pop(); setMsg('Pop.'); setTimeout(() => setPopped(p => p.map((v, j) => j !== i && v)), 1500) }} />
             ))}
             {pellet && <span className={`mizu-pellet ${pellet.fall ? 'is-falling' : ''}`} style={{ left: `${pellet.x}%` }} />}
-            <div className={`mizu-lotl mizu-${morph} ${pinching ? 'is-pinching' : ''} ${waving ? 'is-waving' : ''}`}
+            <div className={`mizu-lotl mizu-${morph} ${pinching ? 'is-pinching' : ''} ${waving || happy ? 'is-waving' : ''}`}
               style={{ left: `${pos.x}%`, top: `${pos.y - depth * 12}%`, transform: `translate(-50%, -60%) scale(${s * face}, ${s})` }}
-              onPointerDown={e => { e.stopPropagation(); e.currentTarget.setPointerCapture(e.pointerId); setPinching(true) }}
+              onPointerDown={e => { e.stopPropagation(); e.currentTarget.setPointerCapture(e.pointerId); lotlDown.current = { x: e.clientX, y: e.clientY }; setPinching(true) }}
               onPointerMove={e => { if (e.currentTarget.hasPointerCapture(e.pointerId)) dragTo(e) }}
-              onPointerUp={e => { e.stopPropagation(); setPinching(false) }}>
-              <Axolotl blinking={blink} />
+              onPointerUp={e => { e.stopPropagation(); setPinching(false); const d = lotlDown.current; lotlDown.current = null; if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) < 10) tapLotl() }}>
+              <div className={happy ? 'mizu-happy' : undefined}><Axolotl blinking={blink} /></div>
             </div>
+            {hearts.map(h => <span key={h.id} className="mizu-heart" style={{ left: `${h.x}%`, top: `${h.y}%` }} aria-hidden="true">{h.c}</span>)}
             <div className="mizu-depth" style={{ background: `rgba(10, 58, 64, ${depth * 0.35})` }} />
           </div>
         </div>
