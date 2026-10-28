@@ -47,7 +47,7 @@ export default function Mizu() {
   }
   function feed() {
     const x = 28 + Math.random() * 44
-    setPellet({ x, fall: false }); setTimeout(() => setPellet({ x, fall: true }), 40)
+    setMsg('Dinner time. A pellet drops.'); setPellet({ x, fall: false }); setTimeout(() => setPellet({ x, fall: true }), 40)
     setTimeout(() => { setDepth(0.08); swim(x, 68); setMsg('She found it.') }, 520)
     setTimeout(() => setPellet(null), 1400)
   }

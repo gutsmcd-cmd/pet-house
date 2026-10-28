@@ -46,7 +46,7 @@ export default function House() {
 
   useEffect(() => { const v = video.current; if (v) { v.src = clip.src; v.muted = true; v.play().catch(() => {}) } }, [clip])
 
-  const wake = () => { setAsleep(false); localStorage.removeItem(NAP) }
+  const wake = () => { setAsleep(false); localStorage.removeItem(NAP); setMsg(m => m.startsWith('Lights down') ? "They're up." : m) }
 
   function bell() {
     const ctx = audioCtx()
