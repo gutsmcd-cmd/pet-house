@@ -1,4 +1,4 @@
-const C = 'pet-house-v1';
+const C = 'pet-house-v2';
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(C);

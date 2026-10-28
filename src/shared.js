@@ -35,3 +35,28 @@ export const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v))
 export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 export const MORPHS = ['pink', 'gold', 'wild', 'dark']
 export function audioCtx() { const A = window.AudioContext || window.webkitAudioContext; return A ? new A() : null }
+
+// ---- language (EN / 日本語), shared by every page ----
+import { useEffect as _uE, useState as _uS } from 'react'
+const LK = 'ph-lang'
+export const getLang = () => { try { return localStorage.getItem(LK) || ((navigator.language || '').startsWith('ja') ? 'ja' : 'en') } catch { return 'en' } }
+export function setLang(l) { try { localStorage.setItem(LK, l) } catch {} ; dispatchEvent(new Event('ph-lang')) }
+export function useLang() {
+  const [l, s] = _uS(getLang)
+  _uE(() => { const f = () => s(getLang()); addEventListener('ph-lang', f); return () => removeEventListener('ph-lang', f) }, [])
+  return l
+}
+// short synthetic bark (no audio files needed)
+let _ac = null
+export function bark(times = 1) {
+  try {
+    _ac = _ac || audioCtx(); if (!_ac) return; _ac.resume?.()
+    for (let i = 0; i < times; i++) {
+      const t = _ac.currentTime + i * 0.22, o = _ac.createOscillator(), g = _ac.createGain(), f = _ac.createBiquadFilter()
+      o.type = 'sawtooth'; o.frequency.setValueAtTime(520, t); o.frequency.exponentialRampToValueAtTime(260, t + 0.12)
+      f.type = 'bandpass'; f.frequency.value = 900; f.Q.value = 1.2
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.5, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16)
+      o.connect(f); f.connect(g); g.connect(_ac.destination); o.start(t); o.stop(t + 0.18)
+    }
+  } catch {}
+}
