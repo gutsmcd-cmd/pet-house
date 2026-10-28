@@ -11,13 +11,14 @@ const routeOf = () => (location.hash.replace(/^#\/?/, '').split(/[?/]/)[0] || 'h
 export const go = to => { location.hash = '#/' + to }
 
 function NotFound() {
+  const ja = useLang() === 'ja'
   return (
     <main className="page notfound">
       <div className="nf-card">
         <div className="nf-emoji" aria-hidden="true">🐾</div>
-        <h1>Nobody's in this room</h1>
-        <p>Mugi sniffed around and Mizu checked behind the stone, but this page isn't here.</p>
-        <a className="nf-btn" href="#/house">Back to the House</a>
+        <h1>{ja ? 'このへやにはだれもいないよ' : "Nobody's in this room"}</h1>
+        <p>{ja ? 'ムギがクンクンさがして、ミズも石のうしろを見たけど、このページはないみたい。' : "Mugi sniffed around and Mizu checked behind the stone, but this page isn't here."}</p>
+        <a className="nf-btn" href="#/house">{ja ? 'おうちにもどる' : 'Back to the House'}</a>
       </div>
     </main>
   )

@@ -269,3 +269,22 @@ input{font:inherit}
 .tray-btn{display:none}
 @media (max-width:600px){ .tray-btn{display:inline-flex} .play .dock .tray{display:none} .play .dock.tray-open .tray{display:flex} .play .dock.tray-open .tricks.tray{display:grid} }
 /* trick tray */
+/* polish pass: lang chip, greeting, seasons, Mizu taps */
+.langchip{white-space:nowrap;flex:none}
+.hello-card{z-index:12;display:flex;align-items:center;gap:10px;margin:0 16px 8px;padding:10px 12px;border-radius:16px;background:#fff8fb;color:#4a2036;box-shadow:0 0 0 2px #f7c6d9,0 4px 14px #7a1f4818;animation:hello-in .5s ease-out}
+.hello-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.35}
+.hello-text b{font-size:16px;color:#c23a7d}.hello-text small{color:#1f5f46;font-weight:600}
+.hello-card .pill{flex:none;white-space:nowrap}
+@media (max-width:420px){.hello-card{flex-wrap:wrap}.hello-card .pill{width:100%;justify-content:center;min-height:40px}}
+.season{position:absolute;z-index:3;inset:0;overflow:hidden;pointer-events:none}
+.season span{position:absolute;top:-8%;font-size:18px;opacity:.85;animation:season-fall 10s linear infinite}
+.season-summer span{top:auto;bottom:30%;font-size:12px;animation-name:season-glow}
+.season-pumpkin{position:absolute;z-index:3;bottom:2%;left:50%;transform:translateX(-50%);font-size:28px;font-style:normal;filter:drop-shadow(0 2px 2px #0003)}
+@keyframes season-fall{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(18px,55vh) rotate(160deg)}to{transform:translate(-10px,110vh) rotate(320deg);opacity:.2}}
+@keyframes season-glow{0%,to{opacity:0;transform:translateY(0)}50%{opacity:.9;transform:translateY(-30px)}}
+@keyframes hello-in{from{opacity:0;transform:translateY(-6px)}}
+.mizu-happy{animation:mizu-happy .9s ease-in-out}
+@keyframes mizu-happy{25%{transform:rotate(-8deg) translateY(-4%)}50%{transform:rotate(7deg)}75%{transform:rotate(-4deg) translateY(-2%)}}
+.mizu-heart{position:absolute;z-index:4;font-size:22px;pointer-events:none;transform:translate(-50%,-50%);animation:mizu-heart 1.6s ease-out forwards}
+@keyframes mizu-heart{to{opacity:0;transform:translate(-50%,-180%) scale(1.3)}}
+@media (prefers-reduced-motion:reduce){.season span,.mizu-happy,.hello-card{animation:none}.season span{display:none}.mizu-heart{animation-duration:.01s}}
