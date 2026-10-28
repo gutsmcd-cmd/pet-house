@@ -1,0 +1,35 @@
+name: build-and-deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Unpack uploaded bundle (one-time)
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          if [ -f b64/done ]; then
+            cat b64/repo.part* | base64 -d > /tmp/repo.tgz
+            echo "$(cat b64/sha256)  /tmp/repo.tgz" | sha256sum -c -
+            tar -xzf /tmp/repo.tgz
+            git rm -r -q b64
+            git add -A && git commit -m "Unpack uploaded site source" && git push origin HEAD:main
+          fi
+      - run: npm ci --no-audit --no-fund && npx vite build
+      - name: Publish dist to gh-pages
+        run: |
+          set -e
+          cd dist && touch .nojekyll
+          git init -q -b gh-pages && git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898333+github-actions[bot]@users.noreply.github.com" commit -q -m "Build $GITHUB_SHA"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" gh-pages:gh-pages
