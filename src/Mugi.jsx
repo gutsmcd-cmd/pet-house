@@ -235,7 +235,7 @@ export default function Mugi() {
       <div className="col">
         <header className="bar">
           <div>
-            <button type="button" className="title" onClick={call}>Mugi</button>
+            <h1 className="title-h"><button type="button" className="title" onClick={call}>Mugi</button></h1>
             <p className="sub">Tap her name to call her</p>
           </div>
           <div className="chips">

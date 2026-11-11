@@ -5,7 +5,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 input{font:inherit}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .hidden{display:none}
-:focus-visible{outline:3px solid #e0559a;outline-offset:2px}
+:focus-visible{outline:3px solid #b4446e;outline-offset:2px}
 
 .shell{height:100dvh;display:flex;flex-direction:column;background:#f6ead8}
 .page{flex:1;min-height:0;overflow:hidden;position:relative}
@@ -15,7 +15,7 @@ input{font:inherit}
 .tabs{flex:none;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:#1f5f46;box-shadow:0 -2px 10px #0002;z-index:20}
 .tab{display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:14px;color:#e6f5ee;text-decoration:none;font-weight:700;font-size:15px}
 .tab span{font-size:18px}
-.tab.is-on{background:#f7c6d9;color:#7a1f48;box-shadow:inset 0 -3px 0 #e0559a}
+.tab.is-on{background:#f7c6d9;color:#7a1f48;box-shadow:inset 0 -3px 0 #b4446e}
 .tab:not(.is-on):hover{background:#ffffff1a}
 
 /* shared bits */
@@ -24,7 +24,7 @@ input{font:inherit}
 .sub{margin:4px 0 0;font-size:14px;opacity:.75}
 .chips{display:flex;gap:8px}
 .chip{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;border:0;background:var(--surface,#ffffffb8);color:var(--fg,#241c16)}
-.chip[aria-pressed=true]{background:var(--primary,#e0559a);color:#fff}
+.chip[aria-pressed=true]{background:var(--primary,#b4446e);color:#fff}
 .dock{z-index:10;display:flex;flex-direction:column;gap:10px;padding:10px 16px 12px}
 .msg{margin:0;min-height:24px;font-size:14px;opacity:.8}
 .row{display:flex;align-items:center;gap:8px}
@@ -50,7 +50,7 @@ input{font:inherit}
 .house-dawn{background:#f8e2c8}.house-day{background:#f6ead8}.house-dusk{background:#f2c4a4}
 .house-night{color:#f4fbf8;background:#16242c;--surface:#ffffffd0;--fg:#241c16}
 .house .chip{background:#ffffffb8;color:#241c16}
-.house{--primary:#e0559a}
+.house{--primary:#b4446e}
 .house-room{position:relative;flex:1;min-height:0;touch-action:none}
 .house-sky{position:absolute;inset:0 0 28%;background:linear-gradient(var(--sky-top,#f3d7b0),var(--sky-bot,#f6ead8))}
 .house-dawn .house-sky{--sky-top:#f6b9a4;--sky-bot:#f8e2c8}
@@ -90,7 +90,7 @@ input{font:inherit}
 .house-cooker,.house-kettle,.house-pan{position:relative;flex:none;border:0;padding:0}
 .house-cooker{width:48px;height:52px;border-radius:8px 8px 10px 10px;background:#f7f7f5;box-shadow:inset 0 -8px #ddd}
 .house-cooker span{position:absolute;top:4px;left:6px;width:36px;height:12px;border-radius:6px 6px 2px 2px;background:#2c2c2c}
-.house-cooker.is-on{box-shadow:inset 0 -8px #ddd,0 0 0 2px #e0559a}
+.house-cooker.is-on{box-shadow:inset 0 -8px #ddd,0 0 0 2px #b4446e}
 .house-cooker.is-on::after,.house-kettle.is-on::after{content:"";position:absolute;top:-14px;left:16px;width:8px;height:14px;border-radius:8px;background:#ffffffb3;animation:house-steam .8s ease-in-out infinite}
 .house-kettle{width:44px;height:44px;border-radius:0 12px 12px;background:#c5ccd1;box-shadow:inset -6px 0 #9aa3a8}
 .house-pan{display:grid;grid-template-columns:repeat(3,8px);place-content:center;gap:3px;width:48px;height:44px;border-radius:50%;background:#2b2e33}
@@ -100,7 +100,7 @@ input{font:inherit}
 .house-rain span{position:absolute;top:-10%;width:2px;height:18px;background:#ffffff8c;animation:house-fall .9s linear infinite}
 
 /* ---------- Mugi ---------- */
-.mugi{--bg:#efe6d6;--surface:#fffaf3;--fg:#241c16;--muted:#6e6258;--primary:#e0559a;--on-primary:#fff;--line:#e2d6c4;background:var(--bg);color:var(--fg)}
+.mugi{--bg:#efe6d6;--surface:#fffaf3;--fg:#241c16;--muted:#6e6258;--primary:#b4446e;--on-primary:#fff;--line:#e2d6c4;background:var(--bg);color:var(--fg)}
 .mugi .col{max-width:28rem}
 .mugi-room{position:relative;flex:1;min-height:0;touch-action:none;overflow:hidden;background:linear-gradient(#f6ead8 0 62%,#e4cfb4 62% 100%)}
 .mugi-cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -109,7 +109,7 @@ input{font:inherit}
 .mugi-dog img,.mugi-dog video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:1.5rem}
 .mugi-dog .fill{border-radius:1.5rem;box-shadow:0 0 0 4px #f7c6d9}
 .mugi-clip{animation:mugi-in .28s ease-out}
-.mugi-ball{position:absolute;z-index:2;width:44px;height:44px;margin:-22px 0 0 -22px;border:0;border-radius:999px;touch-action:none;background:radial-gradient(circle at 35% 35%,#fff6ee,#e0559a 46%,#8f2457);box-shadow:inset -6px -6px #5a0e3040}
+.mugi-ball{position:absolute;z-index:2;width:44px;height:44px;margin:-22px 0 0 -22px;border:0;border-radius:999px;touch-action:none;background:radial-gradient(circle at 35% 35%,#fff6ee,#b4446e 46%,#8f2457);box-shadow:inset -6px -6px #5a0e3040}
 .mugi-scratch{transform-origin:50% 70%;animation:mugi-scratch .52s ease-out}
 .mugi-nod{transform-origin:50% 30%;animation:mugi-apt .38s ease-in-out infinite}
 .mugi .dock{background:#efe6d6e6}
@@ -172,7 +172,7 @@ input{font:inherit}
 @media (max-width:600px){ .tab{flex-direction:column;gap:0;font-size:12px;min-height:50px} .tab span{font-size:18px} }
 
 /* ---------- Play (interactive Mugi) ---------- */
-.play{--primary:#e0559a;--surface:#ffffffd9;--fg:#241c16;color:#241c16;background:#eaf6ee}
+.play{--primary:#b4446e;--surface:#ffffffd9;--fg:#241c16;color:#241c16;background:#eaf6ee}
 .langchip{width:auto!important;padding:0 12px;font-weight:700;font-size:14px}
 .play .bar{padding-bottom:4px}
 .play-scene{position:relative;flex:1;min-height:0;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:20px;margin:0 10px}
@@ -215,7 +215,7 @@ input{font:inherit}
 .play .dock{gap:8px}
 .grow{flex:1}
 .on-listen{background:#1f5f46!important;animation:pulse 1.2s infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 6px #e0559a55}}
+@keyframes pulse{50%{box-shadow:0 0 0 6px #b4446e55}}
 .tricks{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .trick{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:52px;border-radius:12px;border:0;background:#fff;font-size:13px;font-weight:700;color:#7a1f48;padding:4px 2px}
 .trick.locked{background:#ffffff80;color:#999}
@@ -234,7 +234,7 @@ input{font:inherit}
 .vision-err{position:absolute;top:40%;left:20px;right:20px;text-align:center;background:#000a;padding:12px;border-radius:12px}
 
 /* ---------- Films (home videos) ---------- */
-.films{--primary:#e0559a;--surface:#fff;color:#241c16;background:#fdeef4}
+.films{--primary:#b4446e;--surface:#fff;color:#241c16;background:#fdeef4}
 .scroll{overflow-y:auto}
 .films-player{margin:0 14px;border-radius:18px;overflow:hidden;background:#1f5f46;aspect-ratio:16/10;display:grid;place-items:center}
 .films-player video{width:100%;height:100%;object-fit:contain;background:#000}
@@ -262,8 +262,8 @@ input{font:inherit}
 .photo-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#a8dcb6}
 .photo-dog{position:absolute;transform:translate(-50%,-100%);touch-action:none;cursor:grab}
 .photo-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(#0000,#000b)}
-.photo-bar input{flex:1;accent-color:#e0559a}
-.photo .primary{background:#e0559a;color:#fff}
+.photo-bar input{flex:1;accent-color:#b4446e}
+.photo .primary{background:#b4446e;color:#fff}
 .pagebox{flex:1;min-height:0;display:flex;flex-direction:column}
 .pagebox>.page{flex:1}
 .tray-btn{display:none}
@@ -288,3 +288,4 @@ input{font:inherit}
 .mizu-heart{position:absolute;z-index:4;font-size:22px;pointer-events:none;transform:translate(-50%,-50%);animation:mizu-heart 1.6s ease-out forwards}
 @keyframes mizu-heart{to{opacity:0;transform:translate(-50%,-180%) scale(1.3)}}
 @media (prefers-reduced-motion:reduce){.season span,.mizu-happy,.hello-card{animation:none}.season span{display:none}.mizu-heart{animation-duration:.01s}}
+.title-h{margin:0;font-size:inherit;line-height:1}

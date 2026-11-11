@@ -103,7 +103,7 @@ export default function House() {
       <div className="col">
         <header className="bar">
           <div>
-            <button type="button" className="title" onClick={bell}>House</button>
+            <h1 className="title-h"><button type="button" className="title" onClick={bell}>House</button></h1>
             <p className="sub">Namba · {label}</p>
           </div>
           <div className="chips">

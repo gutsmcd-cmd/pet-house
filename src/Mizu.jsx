@@ -134,7 +134,7 @@ export default function Mizu() {
       <div className="col">
         <header className="bar">
           <div>
-            <button type="button" className="title" onClick={call}>Mizu</button>
+            <h1 className="title-h"><button type="button" className="title" onClick={call}>Mizu</button></h1>
             <p className="sub">Tap her name. She comes to the glass.</p>
           </div>
           <div className="chips">
