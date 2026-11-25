@@ -239,7 +239,7 @@ export default function Mugi() {
             <p className="sub">Tap her name to call her</p>
           </div>
           <div className="chips">
-            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label="Language">{getLang() === 'ja' ? 'EN' : '日本語'}</button>
+            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label={getLang() === 'ja' ? 'Switch to English' : '日本語にする'} lang={getLang() === 'ja' ? 'en' : 'ja'}>{getLang() === 'ja' ? 'EN' : '日本語'}</button>
             <button type="button" className="chip" aria-pressed={cam} onClick={toggleCam} title={cam ? 'Stop the camera' : 'Look together'}>
               {cam ? <CameraOff /> : <Camera />}<span className="sr">{cam ? 'Stop the camera' : 'Look together'}</span>
             </button>

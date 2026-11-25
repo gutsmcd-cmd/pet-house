@@ -138,7 +138,7 @@ export default function Mizu() {
             <p className="sub">Tap her name. She comes to the glass.</p>
           </div>
           <div className="chips">
-            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label="Language">{getLang() === 'ja' ? 'EN' : '日本語'}</button>
+            <button type="button" className="chip langchip" onClick={() => setLang(getLang() === 'ja' ? 'en' : 'ja')} aria-label={getLang() === 'ja' ? 'Switch to English' : '日本語にする'} lang={getLang() === 'ja' ? 'en' : 'ja'}>{getLang() === 'ja' ? 'EN' : '日本語'}</button>
             <button type="button" className="chip" aria-pressed={night} title={night ? 'Lights on' : 'Lights off'} onClick={() => { const n = !night; setNight(n); setMsg(n ? 'Lights down. She rests.' : 'Lights up.') }}>
               {night ? <Sun /> : <Moon />}<span className="sr">{night ? 'Lights on' : 'Lights off'}</span>
             </button>
